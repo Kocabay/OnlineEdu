@@ -32,8 +32,7 @@
             <td>@item.Item3</td>
             <td>@item.Item4</td>
             <td>
-             @*    <button onclick="DeleteAbout(@item.AboutId)" class="btn btn-outline-danger">Sil</button> *@
-                <a asp-action="DeleteAbout" asp-controller="About" asp-area="Admin" asp-route-id="@item.AboutId" class="btn btn-outline-danger">Sil</a>
+               <button onclick="DeleteAbout(@item.AboutId)" class="btn btn-outline-danger">Sil</button> 
                 <a asp-action="UpdateAbout" asp-controller="About" asp-area="Admin" asp-route-id="@item.AboutId" class="btn btn-outline-info">Güncelle</a>
 
 
@@ -49,9 +48,7 @@
 
 <script>
 
-        function deleteAbout(id) {
-
-
+        function DeleteAbout(id) {
 
                     Swal.fire({
       title: "Silmek istediğinize emin misiniz?",

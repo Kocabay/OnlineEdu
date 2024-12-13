@@ -6,7 +6,7 @@ using OnlineEdu.Entity.Entities;
 
 namespace OnlineEdu.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BlogsController(IGenericService<Blog> _blogService, IMapper _mapper) : ControllerBase
     {

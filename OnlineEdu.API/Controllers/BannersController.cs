@@ -8,7 +8,7 @@ using OnlineEdu.Entity.Entities;
 
 namespace OnlineEdu.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BannersController(IGenericService<Banner> _bannerService, IMapper _mapper) : ControllerBase
     {
