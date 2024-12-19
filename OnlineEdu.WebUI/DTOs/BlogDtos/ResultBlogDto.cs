@@ -10,6 +10,6 @@ namespace OnlineEdu.WebUI.DTOs.BlogDtos
         public string ImageUrl { get; set; }
         public DateTime BlogDate { get; set; }
         public int BlogCategoryId { get; set; }
-        public ResultBlogCategoryDto BlogCategoryDto { get; set; }
+        public ResultBlogCategoryDto BlogCategory { get; set; }
     }
 }

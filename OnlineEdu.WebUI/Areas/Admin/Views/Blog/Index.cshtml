@@ -1,10 +1,9 @@
-﻿@using OnlineEdu.WebUI.DTOs.BlogCategoryDtos
-@model List<ResultBlogCategoryDto>
+﻿@using OnlineEdu.WebUI.DTOs.BlogDtos
+@model List<ResultBlogDto>
 @{
-    ViewData["Title"] = "Blog Kategorileri";
+    ViewData["Title"] = "Bloglar";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 
 
 @{
@@ -13,8 +12,10 @@
 <table class="table table-hover">
     <tr>
         <th>#</th>
-        <th>Id</th>
-        <th>Blog Kategori Adı</th>
+        <th>Resim</th>
+        <th>Blog Başlığı</th>
+        <th>Tarih</th>
+        <th>Kategori</th>
 
         <th></th>
     </tr>
@@ -23,11 +24,13 @@
         count++;
         <tr>
             <th>@count</th>
-            <th>@item.BlogCategoryId</th>
-            <td>@item.Name</td>
+            <td><img src="@item.ImageUrl" style="height:75px; width:75px;" /></td>
+            <td>@item.Title</td>
+            <td>@item.BlogDate.ToShortDateString()</td>
+            <td>@item.BlogCategory.Name</td>
             <td>
-                <button onclick="deleteBlogCategory(@item.BlogCategoryId)" class="btn btn-outline-danger">Sil</button>
-                <a asp-action="UpdateBlogCategory" asp-controller="BlogCategory" asp-area="Admin" asp-route-id="@item.BlogCategoryId" class="btn btn-outline-info">Güncelle</a>
+                <button onclick="deleteBlog(@item.BlogId)" class="btn btn-outline-danger">Sil</button>
+                <a asp-action="UpdateBlog" asp-controller="Blog" asp-area="Admin" asp-route-id="@item.BlogId" class="btn btn-outline-info">Güncelle</a>
 
 
             </td>
@@ -36,11 +39,11 @@
 </table>
 
 <br />
-<a asp-action="CreateBlogCategory" asp-controller="BlogCategory" asp-area="Admin" class="btn btn-outline-primary">Yeni Blog Kategorisi Ekle</a>
+<a asp-action="CreateBlog" asp-controller="Blog" asp-area="Admin" class="btn btn-outline-primary">Yeni Blog Ekle</a>
 
 <script>
 
-    function deleteBlogCategory(id) {
+    function deleteBlog(id) {
                 Swal.fire({
                   title: "Silmek istediğinize emin misiniz?",
                   text: "Bu işlemi geri alamazsınız!",
@@ -52,7 +55,7 @@
                   cancelButtonText: "İptal"
                 }).then((result) => {
                   if (result.isConfirmed) {
-                 window.location.href = "/Admin/BlogCategory/DeleteBlogCategory/" + id;
+                 window.location.href = "/Admin/Blog/DeleteBlog/" + id;
                   }
                 });
                 }

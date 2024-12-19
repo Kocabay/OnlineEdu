@@ -8,7 +8,7 @@ namespace OnlineEdu.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CourseCategoriesController(IGenericService<CourseCategory> _courseCategoryService, IMapper _mapper) : ControllerBase
+    public class CourseCategoryController(ICourseCategoryService _courseCategoryService, IMapper _mapper) : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
@@ -63,6 +63,18 @@ namespace OnlineEdu.API.Controllers
             return Ok(courseCount);
         }
 
+        [HttpGet("ShowOnHome/{id}")]
+        public IActionResult ShowOnHome(int id)
+        {
+            _courseCategoryService.TShowOnHome(id);
+            return Ok("Anasayfada Yayınlandı.");
+        }
+        [HttpGet("DontShowOnHome/{id}")]
+        public IActionResult DontShowOnHome(int id)
+        {
+            _courseCategoryService.TDontShowOnHome(id);
+            return Ok("Anasayfada Yayınlanmadı.");
+        }
 
     }
 }

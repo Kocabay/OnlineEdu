@@ -1,0 +1,25 @@
+﻿@using OnlineEdu.WebUI.DTOs.BlogDtos
+@model CreateBlogDto
+@{
+    ViewData["Title"] = "Yeni Blog Oluştur";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<form method="post">
+    <label>Blog Adı</label>
+    <input type="text" asp-for="Title" class="form-control" />
+    <br />
+    <label>Resim Url</label>
+    <input type="text" asp-for="ImageUrl" class="form-control" />
+    <br />
+    <label>Blog Kategorisi</label>
+    <select asp-items="@ViewBag.categories" asp-for="BlogCategoryId" class="form-control">
+        <option>Kategori Seçin</option>
+    </select>
+    <label>Blog İçeriği</label>
+    <textarea type="text" asp-for="Content" rows="5" class="form-control"></textarea>
+    <br />
+    <button class="btn btn-outline-primary">Kaydet</button>
+</form>
+

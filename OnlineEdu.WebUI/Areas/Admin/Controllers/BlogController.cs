@@ -15,7 +15,7 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
 
         public async Task CategoryDropDown()
         {
-            var categoryList = await _client.GetFromJsonAsync<List<ResultBlogCategoryDto>>("categories");
+            var categoryList = await _client.GetFromJsonAsync<List<ResultBlogCategoryDto>>("blogCategories");
             List<SelectListItem> categories = (from x in categoryList
                                                select new SelectListItem
                                                {
@@ -57,6 +57,7 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateBlog(int id)
         {
+            await CategoryDropDown();
             var value = await _client.GetFromJsonAsync<UpdateBlogDto>($"blogs/{id}");
             return View(value);
         }
