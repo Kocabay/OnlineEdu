@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.Bussiness.Abstract;
-using OnlineEdu.DTO.DTOs.AboutDtos;
 using OnlineEdu.DTO.DTOs.BannerDtos;
 using OnlineEdu.Entity.Entities;
 
