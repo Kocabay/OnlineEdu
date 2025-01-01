@@ -17,6 +17,16 @@ namespace OnlineEdu.Bussiness.Concrete
            courseRepository.DontShowOnHome(id);
         }
 
+        public List<Course> TGetAllCoursesWithCategories()
+        {
+           return  courseRepository.GetAllCoursesWithCategories();
+        }
+
+        public List<Course> TGetCourseByTeacherId(int id)
+        {
+            return courseRepository.GetCourseByTeacherId(id);
+        }
+
         public void TShowOnHome(int id)
         {
             courseRepository.ShowOnHome(id);

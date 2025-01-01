@@ -35,6 +35,7 @@ namespace OnlineEdu.API.Controllers
         [HttpPost]
         public IActionResult Create(CreateBlogDto createBlogDto)
         {
+
             var newValue = _mapper.Map<Blog>(createBlogDto);
             _blogService.TCreate(newValue);
             return Ok("Yeni Kategori Alanı Oluşturuldu.");
@@ -47,6 +48,14 @@ namespace OnlineEdu.API.Controllers
             var value = _mapper.Map<Blog>(updateBlogDto);
             _blogService.TUpdate(value);
             return Ok("Kategori Alanı Güncellendi.");
+        }
+
+        [HttpGet("GetBlogByWriterId/{id}")]
+        public IActionResult GetBlogByWriterId(int id)
+        {
+            var values = _blogService.TGetBlogsWtihCategoriesByWriterId(id);
+            var mappedValues = _mapper.Map<List<ResultBlogDto>>(values);
+            return Ok(mappedValues);
         }
     }
 }

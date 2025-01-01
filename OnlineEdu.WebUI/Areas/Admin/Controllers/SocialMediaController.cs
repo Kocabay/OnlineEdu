@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.WebUI.DTOs.SocialMediaDtos;
 using OnlineEdu.WebUI.Helpers;
 
 namespace OnlineEdu.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    [Route("[area]/[controller]/[action]/{id?}")]
     public class SocialMediaController : Controller
     {
         private readonly HttpClient _client = HtppClientInstance.CreateClient();
@@ -25,7 +26,7 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult CreateSocialMedia()
         {
-             
+
             return View();
         }
 
@@ -39,7 +40,7 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateSocialMedia(int id)
         {
-            
+
             var value = await _client.GetFromJsonAsync<UpdateSocialMediaDto>($"SocialMedias/{id}");
             return View(value);
         }
