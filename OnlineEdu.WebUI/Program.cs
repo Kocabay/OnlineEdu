@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<OnlineEduContext>().AddErrorDescriber<CustomErrorDescriber>();
 builder.Services.AddHttpClient();
 
 builder.Services.ConfigureApplicationCookie(cfg =>
@@ -27,7 +27,6 @@ builder.Services.AddDbContext<OnlineEduContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
 });
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<OnlineEduContext>().AddErrorDescriber<CustomErrorDescriber>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

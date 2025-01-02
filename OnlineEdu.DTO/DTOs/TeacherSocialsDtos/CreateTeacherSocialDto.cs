@@ -1,4 +1,4 @@
-﻿namespace OnlineEdu.DTO.DTOs.TeacherSocialDtos
+﻿namespace OnlineEdu.DTO.DTOs.TeacherSocialsDtos
 {
     public class CreateTeacherSocialDto
     {
