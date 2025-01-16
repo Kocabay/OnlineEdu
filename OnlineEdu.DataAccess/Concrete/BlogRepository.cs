@@ -19,6 +19,11 @@ namespace OnlineEdu.DataAccess.Concrete
             return _context.Blogs.Include(x => x.BlogCategory).Where(x => x.WriterId == id).ToList();
         }
 
+        public List<Blog> GetLastFourBlogsWithCategories()
+        {
+            return _context.Blogs.Include(x => x.BlogCategory).OrderByDescending(x => x.BlogId).Take(4).ToList();
+        }
+
         List<Blog> IBlogRepository.GetBlogsWithCategories()
         {
             return _context.Blogs.Include(x => x.BlogCategory).ToList();

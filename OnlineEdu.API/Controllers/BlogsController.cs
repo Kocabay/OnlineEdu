@@ -18,6 +18,14 @@ namespace OnlineEdu.API.Controllers
             return Ok(blogs);
         }
 
+        [HttpGet("getlast4blogs")]
+        public IActionResult GetLast4Blogs()
+        {
+            var values = _blogService.TGetLastFourBlogsWithCategories();
+            var blogs = _mapper.Map<List<ResultBlogDto>>(values);
+            return Ok(blogs);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
