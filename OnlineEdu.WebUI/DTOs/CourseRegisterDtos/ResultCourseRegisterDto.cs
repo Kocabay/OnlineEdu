@@ -1,7 +1,7 @@
-﻿using OnlineEdu.DTO.DTOs.CourseDtos;
-using OnlineEdu.Entity.Entities;
+﻿using OnlineEdu.Entity.Entities;
+using OnlineEdu.WebUI.DTOs.CourseDtos;
 
-namespace OnlineEdu.DTO.DTOs.CourseRegisterDtos
+namespace OnlineEdu.WebUI.DTOs.CourseRegisterDtos
 {
     public class ResultCourseRegisterDto
     {

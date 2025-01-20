@@ -47,5 +47,12 @@ namespace OnlineEdu.API.Controllers
             _testimonialService.TUpdate(value);
             return Ok("Referans Alanı Güncellendi.");
         }
+
+        [HttpGet("GetTestimonialoyCount")]
+        public IActionResult GetTestimonialCount()
+        {
+            var TestimonialCount = _testimonialService.TCount();
+            return Ok(TestimonialCount);
+        }
     }
 }

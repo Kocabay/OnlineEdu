@@ -75,6 +75,11 @@ namespace OnlineEdu.API.Controllers
             _courseCategoryService.TDontShowOnHome(id);
             return Ok("Anasayfada Yayınlanmadı.");
         }
-
+        [HttpGet("GetCourseCategoyCount")]
+        public IActionResult GetCourseCount()
+        {
+            var courseCount = _courseCategoryService.TCount();
+            return Ok(courseCount);
+        }
     }
 }
