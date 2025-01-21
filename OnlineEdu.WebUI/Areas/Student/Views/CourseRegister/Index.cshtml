@@ -30,10 +30,10 @@ else
             count++;
             <tr>
                 <th>@count</th>
-                <th><img src="@item.ImageUrl" style="height:75px;width:75px" /></th>
-                <td>@item.CourseName</td>
-                <td>@item.Price ₺</td>
-                <td>@item.CourseCategory?.Name</td>
+                <th><img src="@item.Course.ImageUrl" style="height:75px;width:75px" /></th>
+                <td>@item.Course.CourseName</td>
+                <td>@item.Course.Price ₺</td>
+                <td>@item.Course.CourseCategory?.Name</td>
                 <td>
                     <button onclick="deleteStudentCourse(@item.CourseId)" class="btn btn-outline-danger">Sil</button>
                     <a asp-action="UpadteCourseRegister" asp-controller="CourseRegisters" asp-area="Student" asp-route-id="@item.CourseId" class="btn btn-outline-info">Güncelle</a>
@@ -44,7 +44,7 @@ else
 }
 
 <br />
-<a asp-action="RegisterToCourse" asp-controller="CourseRegisters" asp-area="Student" class="btn btn-outline-primary">Yeni Kurs Ekle</a>
+<a asp-action="RegisterCourse" asp-controller="CourseRegister" asp-area="Student" class="btn btn-outline-primary">Yeni Kurs Kayıt Ol</a>
 
 <script>
 

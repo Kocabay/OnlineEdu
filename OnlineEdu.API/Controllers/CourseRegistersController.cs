@@ -8,33 +8,33 @@ namespace OnlineEdu.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CourseRegistersController(IGenericService<CourseRegister> _courseRegisterService, IMapper _mapper) : ControllerBase
+    public class CourseRegistersController(ICourseRegisterService _courseRegisterService, IMapper _mapper) : ControllerBase
     {
-        [HttpGet("GetMyCourses/{id}")]
+        [HttpGet("GetMyCourses/{userId}")]
         public IActionResult GetMyCourses(int userId)
         {
-            var value = _courseRegisterService.TGetFilteredList(x => x.AppUserId == userId);
-            var mappedValue = _mapper.Map<List<ResultCourseRegisterDto>>(value);
-            return Ok(mappedValue);
+            var values = _courseRegisterService.TGetAllWithCourseAndCategory(x => x.AppUserId == userId);
+            var mappedValues = _mapper.Map<List<ResultCourseRegisterDto>>(values);
+            return Ok(mappedValues);
         }
 
         [HttpPost]
-        public IActionResult RegisterToCourse(CreateCourseRegisterDto model)
+        public IActionResult RegisterCourse(CreateCourseRegisterDto model)
         {
             var newCourseRegister = _mapper.Map<CourseRegister>(model);
             _courseRegisterService.TCreate(newCourseRegister);
-            return Ok("Kursa Kayıt Başarılı.");
+            return Ok("Kursa Kayıt Başarılı");
         }
 
         [HttpPut]
-        public IActionResult UpadteCourseRegister(UpdateCourseRegisterDto model)
+        public IActionResult UpdateCourseRegister(UpdateCourseRegisterDto model)
         {
-            var updatedCourseRegister = _mapper.Map<CourseRegister>(model);
-            _courseRegisterService.TUpdate(updatedCourseRegister);
-            return Ok("Kurs Kaydı Güncellendi.");
+            var updateModel = _mapper.Map<CourseRegister>(model);
+            _courseRegisterService.TUpdate(updateModel);
+            return Ok("Kurs Kaydı Güncellendi");
         }
 
-        [HttpGet("{id")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var value = _courseRegisterService.TGetById(id);
@@ -46,7 +46,7 @@ namespace OnlineEdu.API.Controllers
         public IActionResult DeleteCourseRegister(int id)
         {
             _courseRegisterService.TDelete(id);
-            return Ok("Kurs Kaydı Silindi.");
+            return Ok("Kurs Kaydı Silindi");
         }
 
     }

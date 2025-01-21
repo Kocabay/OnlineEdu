@@ -1,0 +1,45 @@
+﻿UI
+
+-anasayfada kategorilere göre kursları getirme
+-Tüm kurslar için ayrı sayfa
+-tüm egitmenler sayfası
+- hakkımızda ayrı sayfa ve görüntüleme
+-tüm bloglar sayfası
+-blog detayı
+-footer'da subscribe alanı
+-footer'da sosyal medya 
+-footer yararlı linkler bölümü
+-iletişim sayfası
+
+-Accessdenied sayfası
+-404 sayfası
+
+
+-Admin
+
+-dashboard sayfası
+-aboneler sayfası
+-sidebara rol ve rol atama kısımları eklenecek
+-siteye git alanı eklenecek
+-cıkıs yap eklenecek
+-tüm kullanıcılar yanısıra ögrenciler ve egitmenler listeleme
+-kurslarda kursun egitmen ismi getirme
+
+
+ Teacher 
+
+-dashboard tasarımı
+sidebara social medya alanı eklenecek
+-profil bilgileri kısmı
+-cıkıs yap
+-siteye git
+ 
+Student 
+
+-dashboard tasarımı
+-profil bilgileri kısmı
+-coursevideo entity eklenip api endpointler yazılacak
+-kurslara ait videoların listelenmesi
+-cıkıs yap
+-siteye git
+
