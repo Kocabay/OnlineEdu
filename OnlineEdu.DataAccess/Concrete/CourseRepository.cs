@@ -3,6 +3,7 @@ using OnlineEdu.DataAccess.Abstract;
 using OnlineEdu.DataAccess.Context;
 using OnlineEdu.DataAccess.Repositories;
 using OnlineEdu.Entity.Entities;
+using System.Linq.Expressions;
 
 namespace OnlineEdu.DataAccess.Concrete
 {
@@ -21,7 +22,19 @@ namespace OnlineEdu.DataAccess.Concrete
 
         public List<Course> GetAllCoursesWithCategories()
         {
-           return _context.Courses.Include(x => x.CourseCategory).ToList();
+            return _context.Courses.Include(x => x.CourseCategory).Include(x=>x.AppUser).ToList();
+             
+        }
+
+        public List<Course> GetAllCoursesWithCategories(Expression<Func<Course, bool>> filter = null)
+        {
+            IQueryable<Course> values = _context.Courses.Include(x => x.CourseCategory).Include(x=>x.AppUser).AsQueryable();
+            if (filter != null)
+            {
+                values = values.Where(filter);  
+                
+            }
+            return values.ToList();
         }
 
         public List<Course> GetCourseByTeacherId(int id)

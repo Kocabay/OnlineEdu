@@ -1,6 +1,5 @@
 ﻿UI
 
--anasayfada kategorilere göre kursları getirme
 -Tüm kurslar için ayrı sayfa
 -tüm egitmenler sayfası
 - hakkımızda ayrı sayfa ve görüntüleme

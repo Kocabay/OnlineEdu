@@ -1,6 +1,7 @@
 ﻿using OnlineEdu.Bussiness.Abstract;
 using OnlineEdu.DataAccess.Abstract;
 using OnlineEdu.Entity.Entities;
+using System.Linq.Expressions;
 
 namespace OnlineEdu.Bussiness.Concrete
 {
@@ -20,6 +21,11 @@ namespace OnlineEdu.Bussiness.Concrete
         public List<Course> TGetAllCoursesWithCategories()
         {
            return  courseRepository.GetAllCoursesWithCategories();
+        }
+
+        public List<Course> TGetAllCoursesWithCategories(Expression<Func<Course, bool>> filter = null)
+        {
+            return courseRepository.GetAllCoursesWithCategories(filter);
         }
 
         public List<Course> TGetCourseByTeacherId(int id)
