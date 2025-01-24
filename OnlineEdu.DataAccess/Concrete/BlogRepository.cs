@@ -8,10 +8,10 @@ namespace OnlineEdu.DataAccess.Concrete
 {
     public class BlogRepository : GenericRepository<Blog>, IBlogRepository
     {
-        
+
         public BlogRepository(OnlineEduContext _context) : base(_context)
         {
-             
+
         }
 
         public List<Blog> GetBlogsWtihCategoriesByWriterId(int id)
@@ -26,7 +26,7 @@ namespace OnlineEdu.DataAccess.Concrete
 
         List<Blog> IBlogRepository.GetBlogsWithCategories()
         {
-            return _context.Blogs.Include(x => x.BlogCategory).ToList();
+            return _context.Blogs.Include(x => x.BlogCategory).Include(x => x.Writer).ToList();
         }
     }
 }
