@@ -6,7 +6,9 @@ namespace OnlineEdu.Bussiness.Abstract
     {
         List<Blog> TGetBlogsWithCategories();
         List<Blog> TGetLastFourBlogsWithCategories();
+        public Blog TGetBlogCategory(int id);
         List<Blog> TGetBlogsWtihCategoriesByWriterId(int id);
+        public List<Blog> TGetBlogsByCategoryId(int id);
 
     }
 }
