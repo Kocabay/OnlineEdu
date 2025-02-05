@@ -4,7 +4,7 @@ using OnlineEdu.Entity.Entities;
 
 namespace OnlineEdu.DataAccess.Context
 {
-    public class OnlineEduContext :IdentityDbContext<AppUser,AppRole,int>
+    public class OnlineEduContext : IdentityDbContext<AppUser, AppRole, int>
     {
         public OnlineEduContext(DbContextOptions optiones) : base(optiones)
         {
@@ -22,7 +22,8 @@ namespace OnlineEdu.DataAccess.Context
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Subscriber> Subscribers { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
-        public DbSet<CourseRegister> CourseRegisters{ get; set; }
+        public DbSet<CourseRegister> CourseRegisters { get; set; }
         public DbSet<TeacherSocial> TeacherSocials { get; set; }
+        public DbSet<CourseVideo> CourseVideos { get; set; }
     }
 }

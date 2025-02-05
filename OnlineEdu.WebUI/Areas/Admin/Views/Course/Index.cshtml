@@ -15,6 +15,7 @@
         <th>Kurs Adı</th>
         <th>Fiyat</th>
         <th>Kategori</th>
+        <th>Eğitmen</th>
         <th>Gösterilme Durumu</th>
 
         <th></th>
@@ -28,7 +29,8 @@
             <td><a src="@item.ImageUrl" style="height:75px; width:75px"></a></td>
             <td>@item.CourseName</td>
             <td>@item.Price</td>
-            <td>@item.CourseCategoryId</td>
+            <td>@item.CourseCategory.Name</td>
+            <td>@item.appUser.FirstName @item.appUser.LastName</td>
             <td>@(item.IsShown ? "Gösteriliyor" : "Gösterilmiyor")</td>
             <td>
                 <button onclick="deleteCourse(@item.CourseId)" class="btn btn-outline-danger">Sil</button>
