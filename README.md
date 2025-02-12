@@ -1,21 +1,31 @@
+Projede Kullanılan Teknolojiler:
+🔹 ASP.NET Core 8 – Güçlü ve ölçeklenebilir bir backend mimarisi oluşturmak için
+🔹 Entity Framework – Veritabanı yönetimi ve veri işlemleri için
+🔹 JSON Web Token (JWT) & Cookie Authentication – Kullanıcı güvenliği ve yetkilendirme
+🔹 SQL – Veri yönetimi ve saklama
+🔹 Postman – API testleri ve geliştirme sürecini optimize etmek için
+🔹 Bootstrap – Kullanıcı dostu ve responsive bir arayüz tasarlamak için
+🔹 vb.
+✨ Proje Özellikleri:
+✅ Kullanıcı giriş/kayıt işlemleri ve yetkilendirme mekanizmaları
+✅ Kurs ekleme, video yönetimi ve içerik yayınlama sistemi
+✅ Güçlü ve güvenli bir yapı ile ölçeklenebilir bir sistem tasarımı
+✅ Admin Paneli
+✅ Eğitmen Paneli
+✅ Öğrenci Paneli
 
 
-# OnlineEdu
 
-https://github.com/user-attachments/assets/2aaadd91-a75b-472c-b5a1-c22fa22d3800
 
-https://github.com/user-attachments/assets/5fe183af-78ca-4a9a-9664-0895011da07e
+<img src="images/images-1.png" alt="Admin Paneli Hakkımızda Kısmı" width="500">
 
-https://github.com/user-attachments/assets/b369e6c3-fb43-4d18-a157-cc49de7e8dcb
+<img src="images/images-2.png" alt="Admin Paneli Banner Kısmı" width="500">
 
-[Blog_Page.mp4](https://github.com/user-attachments/assets/f2ab363e-ab1d-4856-8056-fe51cef1d279)
+<img src="images/images-3.png" alt="Admin Paneli Kullanıcı Kısmı" width="500">
 
-[Contact_Page.webm](https://github.com/user-attachments/assets/85b18055-237d-4bb9-ab95-1e6fc5eec478)
+<img src="images/images-4.png" alt="Eğitmen Paneli" width="500">
 
-[CourseCategory_Page.webm](https://github.com/user-attachments/assets/bda9d887-13e0-479a-b6e6-10d0ea68d641)
+<img src="images/images-5.png" alt="API Paneli " width="500">
 
-[Course_Page.webm](https://github.com/user-attachments/assets/f439b620-0bf4-427e-af41-90f18bfdd954)
+<img src="images/images-6.png" alt="UI Paneli " width="500">
 
-[Message_Page.webm](https://github.com/user-attachments/assets/01917996-7452-4e1d-be34-57b0256b883a)
-
-[SocialMedia_Page.webm](https://github.com/user-attachments/assets/93f07f22-a322-4e4b-8a29-68bf8fa854cb)
