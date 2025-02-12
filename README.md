@@ -33,7 +33,7 @@ Bootstrap → Kullanıcı dostu ve mobil uyumlu bir arayüz tasarlamak için ter
 Proje Özellikleri
 
 1) Kullanıcı Yönetimi ve Yetkilendirme
-2) 
+
 Kullanıcılar (öğrenciler, eğitmenler ve yöneticiler) sisteme kayıt olabilir ve giriş yapabilir.
 
 Farklı kullanıcı rollerine özel yetkilendirme mekanizmaları uygulanır.
