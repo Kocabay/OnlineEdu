@@ -1,6 +1,6 @@
 OnlineEdu – Çevrimiçi Eğitim Platformu
 OnlineEdu, eğitmenlerin ders oluşturup yayınlayabildiği, öğrencilerin bu derslere katılarak içeriklere erişebildiği ve yöneticilerin platformu kontrol edebildiği modern bir çevrimiçi eğitim sistemidir. Geliştirme sürecinde, güvenli, ölçeklenebilir ve kullanıcı dostu bir yapı oluşturmak için en güncel web teknolojileri kullanılmıştır.
-
+ 
 Projede Kullanılan Teknolojiler
 Backend Teknolojileri
 ASP.NET Core 8: Yüksek performans ve ölçeklenebilirlik sunan bir backend altyapısı sağlamak için kullanılmıştır.
