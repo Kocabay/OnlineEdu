@@ -9,8 +9,12 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class TestimonialController : Controller
     {
-        private readonly HttpClient _client = HtppClientInstance.CreateClient();
+        private readonly HttpClient _client;
 
+        public TestimonialController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("EduClient");
+        }
         public async Task<IActionResult> Index()
         {
 

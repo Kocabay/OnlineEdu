@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.WebUI.DTOs.BlogDtos;
 using OnlineEdu.WebUI.DTOs.SubscriberDtos;
-using OnlineEdu.WebUI.Helpers;
 
 namespace OnlineEdu.WebUI.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly HttpClient _client = HtppClientInstance.CreateClient();
+        private readonly HttpClient _client;
+        public BlogController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("EduClient");
+        }
         public IActionResult Index()
         {
             return View();

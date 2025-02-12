@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.WebUI.DTOs.BlogCategoryDtos;
-using OnlineEdu.WebUI.Helpers;
 using OnlineEdu.WebUI.Validators;
 
 namespace OnlineEdu.WebUI.Areas.Admin.Controllers
@@ -10,7 +9,12 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
     [Area("Admin")]
     public class BlogCategoryController : Controller
     {
-        private readonly HttpClient _client = HtppClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public BlogCategoryController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("EduClient");
+        }
         public async Task<IActionResult> Index()
         {
 

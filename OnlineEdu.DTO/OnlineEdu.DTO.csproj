@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineEdu.DataAccess\OnlineEdu.DataAccess.csproj" />
     <ProjectReference Include="..\OnlineEdu.Entity\OnlineEdu.Entity.csproj" />
   </ItemGroup>
 

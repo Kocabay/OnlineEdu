@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.Bussiness.Abstract;
 using OnlineEdu.DTO.DTOs.TestimonialDtos;
@@ -6,10 +7,12 @@ using OnlineEdu.Entity.Entities;
 
 namespace OnlineEdu.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class TestimonialController(IGenericService<Testimonial> _testimonialService, IMapper _mapper) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {
@@ -47,7 +50,7 @@ namespace OnlineEdu.API.Controllers
             _testimonialService.TUpdate(value);
             return Ok("Referans Alanı Güncellendi.");
         }
-
+        [AllowAnonymous]
         [HttpGet("GetTestimonialoyCount")]
         public IActionResult GetTestimonialCount()
         {

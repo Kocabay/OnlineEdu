@@ -1,21 +1,26 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineEdu.Entity.Entities;
 using OnlineEdu.WebUI.DTOs.TeacherSocialsDtos;
-using OnlineEdu.WebUI.Helpers;
+using OnlineEdu.WebUI.Services.TokenService;
 
 namespace OnlineEdu.WebUI.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
     [Authorize(Roles = "Teacher")]
-    public class MySocialMediaController(UserManager<AppUser> _userManager) : Controller
+    public class MySocialMediaController : Controller
     {
-        private readonly HttpClient _client = HtppClientInstance.CreateClient();
+        private readonly HttpClient _client;
+        private readonly ITokenService _tokenService;
+
+        public MySocialMediaController(IHttpClientFactory clientFactory, ITokenService tokenService)
+        {
+            _client = clientFactory.CreateClient("EduClient");
+            _tokenService = tokenService;
+        }
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var values = await _client.GetFromJsonAsync<List<ResultTeacherSocialDto>>("TeacherSocials/byTeacherId/" + user.Id);
+            var userId = _tokenService.GetUserId;
+            var values = await _client.GetFromJsonAsync<List<ResultTeacherSocialDto>>("TeacherSocials/byTeacherId/" + userId);
             return View(values);
         }
 
@@ -34,8 +39,8 @@ namespace OnlineEdu.WebUI.Areas.Teacher.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSocialMedia(CreateTeacherSocialDto createTeacherSocialDto)
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            createTeacherSocialDto.TeacherId = user.Id;
+            var userId = _tokenService.GetUserId;
+            createTeacherSocialDto.TeacherId = userId;
             await _client.PostAsJsonAsync("TeacherSocials", createTeacherSocialDto);
             return RedirectToAction(nameof(Index));
         }

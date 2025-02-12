@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.Bussiness.Abstract;
 using OnlineEdu.DTO.DTOs.CourseRegisterDtos;
@@ -6,10 +7,13 @@ using OnlineEdu.Entity.Entities;
 
 namespace OnlineEdu.API.Controllers
 {
+
+    [Authorize(Roles = "Admin,Student")]
     [Route("api/[controller]")]
     [ApiController]
     public class CourseRegistersController(ICourseRegisterService _courseRegisterService, IMapper _mapper) : ControllerBase
     {
+
         [HttpGet("GetMyCourses/{userId}")]
         public IActionResult GetMyCourses(int userId)
         {

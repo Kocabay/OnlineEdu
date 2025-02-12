@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.Bussiness.Abstract;
 using OnlineEdu.DTO.DTOs.BlogDtos;
@@ -6,10 +7,12 @@ using OnlineEdu.Entity.Entities;
 
 namespace OnlineEdu.API.Controllers
 {
+    [Authorize(Roles = "Admin,Teacher")]
     [Route("api/[controller]")]
     [ApiController]
     public class BlogsController(IMapper _mapper,IBlogService _blogService) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {
@@ -18,6 +21,7 @@ namespace OnlineEdu.API.Controllers
             return Ok(blogs);
         }
 
+        [AllowAnonymous]
         [HttpGet("getlast4blogs")]
         public IActionResult GetLast4Blogs()
         {
@@ -25,6 +29,7 @@ namespace OnlineEdu.API.Controllers
             var blogs = _mapper.Map<List<ResultBlogDto>>(values);
             return Ok(blogs);
         }
+        [AllowAnonymous]
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
@@ -66,12 +71,14 @@ namespace OnlineEdu.API.Controllers
             return Ok(mappedValues);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetBlogCount")]
         public IActionResult GetBlogCount()
         {
             var blogCount = _blogService.TCount();
             return Ok(blogCount);
         }
+        [AllowAnonymous]
 
         [HttpGet("GetBlogsByCategoryId/{id}")]
         public IActionResult GetBlogsByCategoryId(int id)

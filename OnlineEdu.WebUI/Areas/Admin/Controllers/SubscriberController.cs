@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.WebUI.DTOs.SubscriberDtos;
-using OnlineEdu.WebUI.Helpers;
 
 namespace OnlineEdu.WebUI.Areas.Admin.Controllers
 {
@@ -10,8 +9,12 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
 
     public class SubscriberController : Controller
     {
-        private readonly HttpClient _client = HtppClientInstance.CreateClient();
+        private readonly HttpClient _client;
 
+        public SubscriberController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("EduClient");
+        }
         public async Task<IActionResult> Index()
         {
             var values = await _client.GetFromJsonAsync<List<ResultSubscriberDto>>("Subscribers");

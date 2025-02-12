@@ -1,33 +1,47 @@
-using Microsoft.EntityFrameworkCore;
-using OnlineEdu.DataAccess.Context;
-using OnlineEdu.Entity.Entities;
-using OnlineEdu.WebUI.Services.RoleServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using OnlineEdu.WebUI.Services.TokenService;
 using OnlineEdu.WebUI.Services.UserServices;
-using OnlineEdu.WebUI.Validators;
-using System.Reflection;
+using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IRoleService, RoleService>();
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<OnlineEduContext>().AddErrorDescriber<CustomErrorDescriber>();
-builder.Services.AddHttpClient();
 
-builder.Services.ConfigureApplicationCookie(cfg =>
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddHttpClient("EduClient", cfg =>
 {
-    cfg.LoginPath = "/Login/SignIn";
-    cfg.LogoutPath = "/Login/Logout";
-    cfg.AccessDeniedPath = "/ErrorPage/AccessDenied";
+    var tokenService = builder.Services.BuildServiceProvider().GetRequiredService<ITokenService>();
+    var token = tokenService.GetUserToken;
+    cfg.BaseAddress = new Uri("https://localhost:7052/api/");
+    if (token != null)
+    {
+
+        cfg.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenService.GetUserToken);
+    }
 
 });
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
+{
+    opt.LoginPath = "/Login/SignIn";
+    opt.LogoutPath = "/Login/Logout";
+    opt.AccessDeniedPath = "/ErrorPage/AccessDenied";
+    opt.Cookie.SameSite = SameSiteMode.Strict;
+    opt.Cookie.HttpOnly = true;
+    opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    opt.Cookie.Name = "OnlineEduJwt";
+    opt.SlidingExpiration = true;
+
+
+});
+
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<OnlineEduContext>(opt =>
-{
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
-});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

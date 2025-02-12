@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.WebUI.DTOs.CourseCategoryDtos;
-using OnlineEdu.WebUI.Helpers;
 
 namespace OnlineEdu.WebUI.Areas.Admin.Controllers
 {
@@ -9,7 +8,12 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
     [Area("Admin")]
     public class CourseCategoryController : Controller
     {
-        private readonly HttpClient _client = HtppClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public CourseCategoryController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("EduClient");
+        }
         public async Task<IActionResult> Index()
         {
             var values = await _client.GetFromJsonAsync<List<ResultCourseCategoryDto>>("CourseCategory");

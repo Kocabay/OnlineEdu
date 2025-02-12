@@ -1,14 +1,18 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using OnlineEdu.DataAccess.Context;
-using OnlineEdu.Entity.Entities;
+﻿using Microsoft.AspNetCore.Identity;
 using OnlineEdu.WebUI.DTOs.UserDtos;
+using OnlineEdu.WebUI.Models;
 
 namespace OnlineEdu.WebUI.Services.UserServices
 {
-    public class UserService(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, RoleManager<AppRole> _roleManager, IMapper _mapper, OnlineEduContext _context) : IUserService
+    public class UserService : IUserService
     {
+        private readonly HttpClient _client;
+
+        public UserService(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("EduClient");
+        }
+
         public async Task<bool> AssignRoleAsync(List<AssignRoleDto> assignRoleDto)
         {
             throw new NotImplementedException();
@@ -19,109 +23,51 @@ namespace OnlineEdu.WebUI.Services.UserServices
             throw new NotImplementedException();
         }
 
-        public async Task<IdentityResult> CreateUserAsync(UserRegisterDto userRegisterDto)
+        public Task<IdentityResult> CreateUserAsync(UserRegisterDto userRegisterDto)
         {
-            var user = new AppUser
-            {
-                UserName = userRegisterDto.UserName,
-                Email = userRegisterDto.Email,
-                FirstName = userRegisterDto.FirstName,
-                LastName = userRegisterDto.LastName
-            };
-            if (userRegisterDto.Passowrd != userRegisterDto.ConfirmPassword)
-            {
-                return new IdentityResult();
-            }
-            var result = await _userManager.CreateAsync(user, userRegisterDto.Passowrd);
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(user, "Student");
-                return result;
-            }
-
-            return result;
-
+            throw new NotImplementedException();
         }
 
         public async Task<List<ResultUserDto>> Get4Teachers()
         {
-            var users = await _userManager.Users.Include(x => x.TeacherSocials).ToListAsync();
-            var teachers = users.Where(user => _userManager.IsInRoleAsync(user, "Teacher").Result).OrderByDescending(x => x.Id).Take(4).ToList();
-            return _mapper.Map<List<ResultUserDto>>(teachers);
+            throw new NotImplementedException();
         }
 
         public async Task<List<ResultUserDto>> GetAllTeachers()
         {
-            var users = await _userManager.Users.Include(x => x.TeacherSocials).ToListAsync();
-            var teachers = users.Where(user => _userManager.IsInRoleAsync(user, "Teacher").Result).ToList();
-            return _mapper.Map<List<ResultUserDto>>(teachers);
+            throw new NotImplementedException();
         }
 
-        public async Task<List<AppUser>> GetAllUserAsync()
+        public async Task<List<UserViewModel>> GetAllUserAsync()
         {
 
-            return await _userManager.Users.ToListAsync();
+            return await _client.GetFromJsonAsync<List<UserViewModel>>("RoleAssings");
         }
 
         public async Task<int> GetTeacherCount()
         {
-            var teachers = await _userManager.GetUsersInRoleAsync("Teacher");
-            return teachers.Count();
+            throw new NotImplementedException();
         }
 
-        public async Task<AppUser> GetUserByIdAsync(int id)
+        public async Task<ResultUserDto> GetUserByIdAsync(int id)
         {
-            return await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<AssignRoleDto>> GetUserForRoleAssgin(int id)
+        {
+            return await _client.GetFromJsonAsync<List<AssignRoleDto>>("RoleAssings/" + id);
+
         }
 
         public async Task<string> LoginAsync(UserLoginDto userLoginDto)
         {
-            // Kullanıcıyı e-postasına göre bul
-            var users = await _userManager.Users.Where(u => u.Email == userLoginDto.Email).ToListAsync();
-
-            // Eğer birden fazla kullanıcı varsa hata döndür
-            if (users.Count > 1)
-            {
-                throw new InvalidOperationException("Multiple users found with the same email address.");
-            }
-
-            // Eğer kullanıcı bulunamadıysa
-            if (users.Count == 0)
-            {
-                return null;
-            }
-
-            var user = users.First(); // Tek kullanıcıyı al
-
-            // Şifre doğrulama
-            var result = await _signInManager.PasswordSignInAsync(user, userLoginDto.Password, false, false);
-            if (!result.Succeeded)
-            {
-                return null;
-            }
-
-            // Kullanıcı rollerini kontrol et
-            if (await _userManager.IsInRoleAsync(user, "Admin"))
-            {
-                return "Admin";
-            }
-
-            if (await _userManager.IsInRoleAsync(user, "Teacher"))
-            {
-                return "Teacher";
-            }
-
-            if (await _userManager.IsInRoleAsync(user, "Student"))
-            {
-                return "Student";
-            }
-
-            return "succeeded";
+            throw new NotImplementedException();
         }
 
         public async Task LogoutAsync()
         {
-           await _signInManager.SignOutAsync();
+            throw new NotImplementedException();
 
         }
     }

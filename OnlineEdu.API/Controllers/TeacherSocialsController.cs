@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.Bussiness.Abstract;
 using OnlineEdu.DTO.DTOs.TeacherSocialDtos;
@@ -7,10 +7,12 @@ using OnlineEdu.Entity.Entities;
 
 namespace OnlineEdu.API.Controllers
 {
+    [Authorize(Roles = "Admin,Teacher")]
     [Route("api/[controller]")]
     [ApiController]
     public class TeacherSocialsController(IGenericService<TeacherSocial> _teacherSocialServices, IMapper _mapper) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet("byTeacherId/{id}")]
         public IActionResult GetSocialByTeacherId(int id)
         {
@@ -34,7 +36,7 @@ namespace OnlineEdu.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateTeacherSocialDto  createTeacherSocialDto)
+        public IActionResult Create(CreateTeacherSocialDto createTeacherSocialDto)
         {
             var newValue = _mapper.Map<TeacherSocial>(createTeacherSocialDto);
             _teacherSocialServices.TCreate(newValue);
@@ -43,7 +45,7 @@ namespace OnlineEdu.API.Controllers
 
 
         [HttpPut]
-        public IActionResult Update(UpdateTeacherSocialDto  updateTeacherSocialDto)
+        public IActionResult Update(UpdateTeacherSocialDto updateTeacherSocialDto)
         {
             var value = _mapper.Map<TeacherSocial>(updateTeacherSocialDto);
             _teacherSocialServices.TUpdate(value);
